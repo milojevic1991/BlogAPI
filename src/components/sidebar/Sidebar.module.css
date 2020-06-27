@@ -1,0 +1,13 @@
+.sidebar {
+  width: 20%;
+  min-height: 900px;
+  border-radius: 10px;
+  box-shadow: 0 5px 50px #eaeaea;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+}

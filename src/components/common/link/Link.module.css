@@ -1,0 +1,20 @@
+.navLink {
+  text-decoration: none;
+  letter-spacing: -1px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #fff;
+  transition: all 0.2s;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.navLink:hover {
+  color: yellow;
+}
+
+@media screen and (max-width: 768px) {
+  .navLink {
+    color: rgb(0, 0, 0);
+  }
+}

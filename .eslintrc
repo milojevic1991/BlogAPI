@@ -1,0 +1,36 @@
+{
+  "extends": ["react-app", "plugin:prettier/recommended"],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        // "printWidth": 60,
+        // "semi": true,
+        "jsxSingleQuote": true,
+        "singleQuote": true,
+        "endOfLine": "auto",
+        "linebreak-style": 0,
+        "useTabs": false,
+        "preserve_newlines": false
+      }
+    ],
+
+    "react/no-did-update-set-state": "error",
+    "react/no-unknown-property": "error",
+    "react/no-unused-prop-types": "error",
+    "react/prop-types": "error",
+    "react/react-in-jsx-scope": "error"
+  }
+}

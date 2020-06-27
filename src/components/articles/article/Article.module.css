@@ -1,0 +1,69 @@
+.article {
+  width: 100%;
+  min-height: 350px;
+  border-radius: 10px;
+  background: #fff;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  box-sizing: border-box;
+  box-shadow: 0 5px 50px #eaeaea;
+}
+.blogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100px;
+  position: relative;
+}
+.avatarImg {
+  width: 10%;
+  height: 100%;
+}
+
+.headerMain {
+  width: 90%;
+  display: flex;
+  height: 100%;
+  position: relative;
+}
+.headerMain p {
+  position: absolute;
+  top: 20%;
+  font-weight: 400;
+  font-size: 13px;
+}
+.headerMain a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #fe0000;
+  transition: 0.2s;
+}
+.headerMain a:hover {
+  color: #ca0707;
+}
+.blogTitle {
+  margin: 0;
+  font-size: 25px;
+}
+.headerMainBtn {
+  position: absolute;
+  right: 0;
+}
+.editBtn,
+.deleteBtn {
+  width: 100px;
+  margin: 0 0.5rem;
+  font-size: 14px;
+  height: 35px;
+}
+
+.articleImages > * {
+  margin: 0.5rem;
+}
+
+.article p {
+  text-align: justify;
+  font-weight: 400;
+  font-size: 18px;
+}
