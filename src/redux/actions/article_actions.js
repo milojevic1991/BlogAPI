@@ -1,5 +1,5 @@
 import * as actionsType from './actionType';
-import API from '../../api';
+import API from '../../api'; // axios HTTP
 
 export const GET = () => {
   return async (dispatch) => {
@@ -29,16 +29,49 @@ export const POST = (formData) => {
   };
 };
 
+export const EDIT = (formData, id) => {
+  return async (dispatch) => {
+    dispatch(requestStart());
+    try {
+      const result = await API.put(`/BlogPosts/${id}`, {
+        id: id,
+        title: formData.title,
+        text: formData.text,
+        categoryId: 0,
+      });
+      console.log('EDIT U ACTION,SUV objekt', result);
+      dispatch(editArticles(result, id));
+    } catch (error) {
+      console.log('EROR EDIT ');
+    }
+  };
+};
+
 export const DELETE = (id) => {
   return async (dispatch) => {
     dispatch(requestStart());
     try {
       const result = await API.delete(`/BlogPosts/${id}`);
-      console.log('delete request', result);
-      console.log('delete request id', id);
       dispatch(deleteArticles(result, id));
+    } catch (error) {}
+  };
+};
+
+export const SEARCH = (searchTerm) => {
+  return async (dispatch) => {
+    dispatch(requestStart());
+    try {
+      // const result = await API.get(`/BlogPosts/Search?term=${searchTerm}`);
+
+      const result = await API.get(
+        `/BlogPosts${
+          searchTerm.length === 0 ? `` : `/Search?term=${searchTerm}`
+        }`
+      );
+
+      dispatch(searchArticle(result.data.resultData, searchTerm));
     } catch (error) {
-      console.log('EROR POST DELETE');
+      console.log('EROR U SEARCH', error);
     }
   };
 };
@@ -54,6 +87,14 @@ export const postArticles = (articleData) => {
   return {
     type: actionsType.POST_ARTICLE,
     payload: articleData,
+  };
+};
+
+export const editArticles = (articleData, id) => {
+  return {
+    type: actionsType.EDIT_ARTICLE,
+    payload: articleData,
+    id: id,
   };
 };
 export const deleteArticles = (articleData, id) => {
@@ -83,8 +124,31 @@ export const showPopup = () => {
   };
 };
 
+export const editPopup = (id) => {
+  return {
+    type: actionsType.EDIT_POPUP,
+    id: id,
+  };
+};
+
 export const cancelPopup = () => {
   return {
     type: actionsType.CANCEL_POPUP,
+  };
+};
+
+export const popupFormInput = (name, value) => {
+  return {
+    type: actionsType.POPUP_FORM_INPUT,
+    name: name,
+    value: value,
+  };
+};
+
+export const searchArticle = (articleData, searchTerm) => {
+  return {
+    type: actionsType.SEARCH_ARTICLE,
+    payload: articleData,
+    searchTerm: searchTerm,
   };
 };

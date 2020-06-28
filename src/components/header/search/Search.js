@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './Search.module.css';
 
-const Search = ({ value, onChange }) => {
+const Search = ({ value, searchTerm }) => {
   return (
     <input
       className={classes.inputSearch}
-      onChange={onChange}
+      onChange={searchTerm}
       type='text'
       value={value}
       placeholder='Search term...'

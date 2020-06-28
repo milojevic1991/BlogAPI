@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './Popup.module.css';
 import Title from '../common/title/Title';
@@ -11,25 +11,29 @@ const Popup = ({ articleData }) => {
   const [formData, setFormData] = useState({ title: '', text: '' });
 
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.article.popupActive);
+  const isPopupActive = useSelector((state) => state.article.popupActive);
+  const popupFormData = useSelector((state) => state.article.popup);
+  const articlesData = useSelector((state) => state.article.articles);
 
   const textInputHandler = (e) => {
     const { value, name } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+    dispatch(actions.popupFormInput(name, value));
   };
 
   const postArticleHandler = (e) => {
-    dispatch(actions.POST(formData));
+    if (articlesData.find((article) => article.id === popupFormData.id)) {
+      dispatch(actions.EDIT(popupFormData, popupFormData.id));
+    } else {
+      dispatch(actions.POST(popupFormData));
+    }
     e.preventDefault();
   };
 
   return (
     <form
       className={
-        state
+        isPopupActive
           ? [classes.popupWrapp, classes.active].join(' ')
           : classes.popupWrapp
       }
@@ -40,7 +44,7 @@ const Popup = ({ articleData }) => {
         <label>Title</label>
         <input
           required
-          value={formData.title}
+          value={popupFormData.title}
           name='title'
           type='text'
           placeholder='Enter blog title'
@@ -52,7 +56,7 @@ const Popup = ({ articleData }) => {
         <label>Text</label>
         <textarea
           required
-          value={formData.text}
+          value={popupFormData.text}
           name='text'
           placeholder="I bet it's something interesting . . ."
           onChange={textInputHandler}

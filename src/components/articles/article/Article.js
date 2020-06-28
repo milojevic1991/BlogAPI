@@ -5,7 +5,7 @@ import Image from '../../common/image/Image';
 import Button from '../../common/button/Button';
 import shortid from 'shortid';
 
-const Article = ({ articleData = [], deleteBtn }) => {
+const Article = ({ articleData = [], deleteBtn, editBtn }) => {
   let date = new Date();
 
   return (
@@ -31,7 +31,11 @@ const Article = ({ articleData = [], deleteBtn }) => {
                 <a href='/'>Some person</a>
               </p>
               <div className={classes.headerMainBtn}>
-                <Button className={classes.editBtn} title={'Edit'} />
+                <Button
+                  className={classes.editBtn}
+                  buttonClicked={() => editBtn(article.id)}
+                  title={'Edit'}
+                />
                 <Button
                   buttonClicked={() => deleteBtn(article.id)}
                   className={classes.deleteBtn}
