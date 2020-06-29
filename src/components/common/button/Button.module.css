@@ -16,6 +16,6 @@ button {
   transition: all 0.2s ease-out;
 }
 button:hover {
-  box-shadow: 0 5px 10px #b4b4b4;
+  box-shadow: 0 6px 10px #d8d8d8;
   transform: translateY(-2px);
 }

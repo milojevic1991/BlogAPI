@@ -1,6 +1,11 @@
 import * as actionsType from './actionType';
-import API from '../../api'; // axios HTTP
+import API from '../../api'; // axios HTTP with base URL
 
+/**
+ *I used a single reducer for the sake of time, usually I would split in multiply reducer, and that's why I included 'combine reducer' function in index.js.
+ */
+
+/* Get articles */
 export const GET = () => {
   return async (dispatch) => {
     dispatch(requestStart());
@@ -8,10 +13,13 @@ export const GET = () => {
     try {
       const result = await API.get('/BlogPosts');
       dispatch(getArticles(result.data.resultData));
-    } catch (error) {}
+    } catch (error) {
+      console.log('error GET', error);
+    }
   };
 };
 
+/* Add new article */
 export const POST = (formData) => {
   return async (dispatch) => {
     dispatch(requestStart());
@@ -21,14 +29,14 @@ export const POST = (formData) => {
         text: formData.text,
         categoryId: 0,
       });
-
       dispatch(postArticles(result));
     } catch (error) {
-      console.log('EROR POST');
+      console.log('error POST', error);
     }
   };
 };
 
+/* Edit  article */
 export const EDIT = (formData, id) => {
   return async (dispatch) => {
     dispatch(requestStart());
@@ -39,14 +47,14 @@ export const EDIT = (formData, id) => {
         text: formData.text,
         categoryId: 0,
       });
-      console.log('EDIT U ACTION,SUV objekt', result);
       dispatch(editArticles(result, id));
     } catch (error) {
-      console.log('EROR EDIT ');
+      console.log('error EDIT', error);
     }
   };
 };
 
+/* Delete  article */
 export const DELETE = (id) => {
   return async (dispatch) => {
     dispatch(requestStart());
@@ -57,25 +65,26 @@ export const DELETE = (id) => {
   };
 };
 
+/* Search  article */
+
 export const SEARCH = (searchTerm) => {
   return async (dispatch) => {
     dispatch(requestStart());
     try {
-      // const result = await API.get(`/BlogPosts/Search?term=${searchTerm}`);
-
+      /* Checks if we have a search term */
       const result = await API.get(
         `/BlogPosts${
           searchTerm.length === 0 ? `` : `/Search?term=${searchTerm}`
         }`
       );
-
       dispatch(searchArticle(result.data.resultData, searchTerm));
     } catch (error) {
-      console.log('EROR U SEARCH', error);
+      console.log('error SEARCH', error);
     }
   };
 };
 
+/* Article actions  */
 export const getArticles = (articleData) => {
   return {
     type: actionsType.GET_ARTICLE,
@@ -105,6 +114,8 @@ export const deleteArticles = (articleData, id) => {
   };
 };
 
+/* Request actions  */
+
 export const requestStart = () => {
   return {
     type: actionsType.REQUEST_START,
@@ -115,6 +126,16 @@ export const requestSuccess = (articles) => {
   return {
     type: actionsType.REQUEST_SUCCESS,
     payload: articles,
+  };
+};
+
+/* Popup actions  */
+
+export const popupFormInput = (name, value) => {
+  return {
+    type: actionsType.POPUP_FORM_INPUT,
+    name: name,
+    value: value,
   };
 };
 
@@ -137,18 +158,19 @@ export const cancelPopup = () => {
   };
 };
 
-export const popupFormInput = (name, value) => {
-  return {
-    type: actionsType.POPUP_FORM_INPUT,
-    name: name,
-    value: value,
-  };
-};
-
+/* Search actions  */
 export const searchArticle = (articleData, searchTerm) => {
   return {
     type: actionsType.SEARCH_ARTICLE,
     payload: articleData,
     searchTerm: searchTerm,
+  };
+};
+
+/* Close message actions  */
+
+export const closeNotification = () => {
+  return {
+    type: actionsType.ClOSE_NOTIFICATION,
   };
 };

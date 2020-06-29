@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import classes from './Burger.module.css';
 
 /**
- * Mobile burger.
+ * Mobile burger menu.
  */
 
 const Burger = ({ burgerClicked, active }) => {
   return (
     <div
       onClick={burgerClicked}
+      /* Toggles between  closed and active burger icon */
       className={
         active ? [classes.burger, classes.active].join(' ') : classes.burger
       }

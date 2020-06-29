@@ -1,0 +1,37 @@
+.notificationWrapp {
+  position: relative;
+  background: #e8e8e8;
+  padding: 0.5rem 1rem;
+  height: 100px;
+  margin: 0 0 4rem;
+  border-radius: 10px;
+  transition: all 1s ease;
+  box-shadow: 0 5px 10px #f7f7f7;
+}
+.notificationTitle {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.notificationCloseBtn {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  background: none;
+  color: #000;
+  font-size: 30px;
+  font-weight: 800;
+  position: absolute;
+  top: 0;
+  right: 0.2rem;
+}
+.notificationCloseBtn:hover {
+  box-shadow: none;
+  transform: translateY(-2px) scale(1.2);
+}
+
+@media screen and (max-width: 1000px) {
+  .notificationWrapp {
+    width: 100%;
+  }
+}

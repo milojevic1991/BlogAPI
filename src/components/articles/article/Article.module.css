@@ -8,6 +8,10 @@
   box-sizing: border-box;
   box-shadow: 0 5px 50px #eaeaea;
 }
+
+.article:nth-child(odd) {
+  background: #e8e8e8;
+}
 .blogHeader {
   display: flex;
   align-items: center;
@@ -29,7 +33,7 @@
 }
 .headerMain p {
   position: absolute;
-  top: 20%;
+  top: 25%;
   font-weight: 400;
   font-size: 13px;
 }
@@ -57,7 +61,9 @@
   font-size: 14px;
   height: 35px;
 }
-
+.articleImages {
+  margin-top: 2rem;
+}
 .articleImages > * {
   margin: 0.5rem;
 }
@@ -65,5 +71,47 @@
 .article p {
   text-align: justify;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 1000px) {
+  .article {
+    padding: 1rem;
+  }
+  .blogHeader {
+    flex-direction: column;
+    height: auto;
+  }
+  .avatarImg {
+    width: 50%;
+  }
+
+  .headerMainBtn {
+    position: relative;
+  }
+  .editBtn,
+  .deleteBtn {
+    height: 30px;
+    padding: 0;
+  }
+
+  .headerMain {
+    flex-direction: column;
+  }
+  .headerMain p {
+    font-size: 14px;
+    top: 25%;
+    text-align: center;
+    position: relative;
+  }
+
+  .avatarImg img {
+    height: 100%;
+    width: 30%;
+    /* border-radius: 50%; */
+  }
+  .articleImages > * {
+    height: 100%;
+    width: 25%;
+  }
 }

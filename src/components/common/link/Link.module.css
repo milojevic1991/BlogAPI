@@ -8,9 +8,11 @@
   padding: 10px;
   font-size: 20px;
 }
-
+.navLink a {
+  color: black;
+}
 .navLink:hover {
-  color: yellow;
+  color: red;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,8 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from '../../common/link/Link';
 import classes from '../navBar/NavBar.module.css';
 import shortid from 'shortid';
 
+/**
+ * Navbar .
+ */
+
+/* Menu items data */
 import { MENU_ITEMS } from '../../../data/data';
 
 const NavBar = ({ isBurgerActive, linkClicked }) => {
@@ -29,3 +35,8 @@ const NavBar = ({ isBurgerActive, linkClicked }) => {
 };
 
 export default NavBar;
+
+NavBar.propTypes = {
+  isBurgerActive: PropTypes.bool.isRequired,
+  linkClicked: PropTypes.string,
+};

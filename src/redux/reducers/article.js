@@ -1,12 +1,20 @@
 import * as actionsType from '../actions/actionType';
 
+/* Main state */
 const initialState = {
   articles: [],
-  popup: { title: '', text: '' },
+  popup: {
+    title: '',
+    text: '',
+  },
+  search: {
+    searchTerm: '',
+    searchStarted: false,
+  },
   popupActive: false,
   isLoading: true,
   isEdited: false,
-  searchTerm: '',
+  notification: '',
 };
 
 const article = (state = initialState, action) => {
@@ -24,14 +32,9 @@ const article = (state = initialState, action) => {
       };
 
     case actionsType.GET_ARTICLE:
-      //  let updatedArray = state.art
       return {
         ...state,
         articles: [...action.payload],
-        // articles: {
-        //   ...state.articles,
-        //   ...action.payload,
-        // },
         popupActive: false,
         isLoading: false,
       };
@@ -40,6 +43,7 @@ const article = (state = initialState, action) => {
       return {
         ...state,
         articles: [...state.articles, action.payload.data],
+        notification: 'Blog post added.',
         popupActive: false,
         isLoading: false,
       };
@@ -47,6 +51,7 @@ const article = (state = initialState, action) => {
     case actionsType.EDIT_ARTICLE:
       return {
         ...state,
+        notification: 'Blog post edited.',
         popupActive: false,
         isLoading: false,
         isEdited: true,
@@ -55,6 +60,7 @@ const article = (state = initialState, action) => {
     case actionsType.DELETE_ARTICLE:
       return {
         ...state,
+        notification: 'Blog post deleted.',
         articles: state.articles.filter((el) => el.id !== action.id),
         isLoading: false,
       };
@@ -96,8 +102,18 @@ const article = (state = initialState, action) => {
       return {
         ...state,
         articles: [...action.payload],
-        searchTerm: action.searchTerm,
+        search: {
+          ...state.search,
+          searchTerm: action.searchTerm,
+          searchStarted: action.searchTerm.length === 0 ? false : true,
+        },
         isLoading: false,
+      };
+
+    case actionsType.ClOSE_NOTIFICATION:
+      return {
+        ...state,
+        notification: '',
       };
 
     default:

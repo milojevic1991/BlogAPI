@@ -1,24 +1,29 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import classes from './Articles.module.css';
 import Article from './article/Article';
-import * as actions from '../../redux/actions/article_actions';
 import Loader from 'react-loader-spinner';
+import Title from '../common/title/Title';
+import classes from './Articles.module.css';
+import * as actions from '../../redux/actions/article_actions';
+
+/**
+ * Articles component.
+ */
 
 const Articles = () => {
   const dispatch = useDispatch();
-  const stateArticles = useSelector((state) => state.article.articles);
-  const stateLoading = useSelector((state) => state.article.isLoading);
 
+  /* States from Redux Store */
+  const articlesData = useSelector((state) => state.article.articles);
+  const isLoading = useSelector((state) => state.article.isLoading);
   const isEdited = useSelector((state) => state.article.isEdited);
+  const searchData = useSelector((state) => state.article.search);
 
   useEffect(() => {
     dispatch(actions.GET());
-    console.log('GET OBJECT', stateArticles);
   }, [isEdited, dispatch]);
 
-  console.log('article');
-
+  /* Btn events */
   const deleteBtnHandler = (id) => {
     dispatch(actions.DELETE(id));
   };
@@ -29,9 +34,20 @@ const Articles = () => {
 
   return (
     <section className={classes.articles}>
-      {!stateLoading ? (
+      {/* Message when articles are zero. */}
+
+      {searchData.searchStarted && articlesData.length === 0 ? (
+        <Title title={'Sorry, no results were found.'} />
+      ) : null}
+
+      {/*Toggles between articles, and search results.*/}
+      {!isLoading &&
+      articlesData.length === 0 &&
+      searchData.searchTerm.length === 0 ? (
+        <Title title={`Its quiet here, add something :)`} />
+      ) : !isLoading ? (
         <Article
-          articleData={stateArticles}
+          articleData={articlesData}
           deleteBtn={deleteBtnHandler}
           editBtn={editBtnHandler}
         />
