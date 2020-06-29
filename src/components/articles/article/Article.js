@@ -83,7 +83,7 @@ const Article = ({ articleData = [], deleteBtn, editBtn }) => {
 export default Article;
 
 Article.propTypes = {
-  articleData: PropTypes.array.isRequired,
+  articleData: PropTypes.array,
   deleteBtn: PropTypes.func,
   editBtn: PropTypes.string,
 };

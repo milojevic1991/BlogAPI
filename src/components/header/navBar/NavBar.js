@@ -38,5 +38,5 @@ export default NavBar;
 
 NavBar.propTypes = {
   isBurgerActive: PropTypes.bool.isRequired,
-  linkClicked: PropTypes.string,
+  linkClicked: PropTypes.func,
 };

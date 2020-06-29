@@ -24,6 +24,6 @@ export default Link;
 Link.propTypes = {
   linkName: PropTypes.string.isRequired,
   linkTo: PropTypes.string,
-  style: PropTypes.array,
+  style: PropTypes.object,
   linkClicked: PropTypes.func,
 };
